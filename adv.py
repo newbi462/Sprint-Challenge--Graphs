@@ -29,7 +29,8 @@ player = Player(world.starting_room)
 # Fill this out with directions to walk
 # traversal_path = ['n', 'n']
 my_key_graph = {
-    "all_rooms": []
+    "all_rooms": [],
+    "path_to_go": []#make this a list of node order to follow and then convert to directions based on room.direction keys
 }
 traversal_path = []
 
@@ -79,14 +80,18 @@ def dfs(starting_vertex, destination_vertex):
 
     return visited
 
+### Need a loop recurshiuon that will re run this for each leg
 first_start = player.current_room.id
 go_to_room = my_key_graph["all_rooms"][10]
 
 path_leg = dfs(first_start, go_to_room)
 print(path_leg)
+for room in path_leg:
+    my_key_graph[ str(room) ]["visited"] = True
+    my_key_graph["path_to_go"].append(room)
+    print(my_key_graph[ str(room) ])
+print(my_key_graph["path_to_go"])
 
-
-### Need a loop recurshiuon that will re run this for each leg
 ### translate to directions
 
 
