@@ -57,9 +57,35 @@ while s.size() > 0:# Repeat until queue is empty
             s.push(here.get_room_in_direction(x))
 #for room in all_rooms:
 #    print(room)
-print(my_key_graph)
+#print(my_key_graph)
 
 ### Path fo go from room[0] to next taget not visted to do that...
+#can I use DFS to get legs of roomX to roomY?
+def dfs(starting_vertex, destination_vertex):
+    s = Stack()
+    s.push([starting_vertex])
+    visited = set()
+
+    while s.size() > 0:
+        path = s.pop()
+        vertex = path[-1] #the room
+        if vertex not in visited:
+            visited.add(vertex) # Mark it as visited...
+            if vertex == destination_vertex:
+                return path # IF SO, RETURN PATH
+            else:# Then add A PATH TO its neighbors to the back of the queue
+                for x in world.rooms[vertex].get_exits():
+                    s.push([*path, world.rooms[vertex].get_room_in_direction(x).id])
+
+    return visited
+
+first_start = player.current_room.id
+go_to_room = my_key_graph["all_rooms"][10]
+
+path_leg = dfs(first_start, go_to_room)
+print(path_leg)
+
+
 ### Need a loop recurshiuon that will re run this for each leg
 ### translate to directions
 
