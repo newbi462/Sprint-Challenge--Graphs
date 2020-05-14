@@ -106,7 +106,19 @@ for index in range( 0, len(my_key_graph["all_rooms"]) ):
 print(my_key_graph["path_to_go"])
 
 ### translate to directions
-
+for i in range(0, len(my_key_graph["path_to_go"])-1):
+    #print(my_key_graph["path_to_go"][i+1])
+    room_is_in = my_key_graph["path_to_go"][i]
+    if my_key_graph["path_to_go"][i+1] == my_key_graph[ str(room_is_in) ]["n"]:
+        traversal_path.append("n")
+    if my_key_graph["path_to_go"][i+1] == my_key_graph[ str(room_is_in) ]["s"]:
+        traversal_path.append("s")
+    if my_key_graph["path_to_go"][i+1] == my_key_graph[ str(room_is_in) ]["e"]:
+        traversal_path.append("e")
+    if my_key_graph["path_to_go"][i+1] == my_key_graph[ str(room_is_in) ]["w"]:
+        traversal_path.append("w")
+#print(traversal_path)
+#print(f"steps: {len(traversal_path)}")
 
 
 # TRAVERSAL TEST - DO NOT MODIFY
