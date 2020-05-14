@@ -1,6 +1,7 @@
 from room import Room
 from player import Player
 from world import World
+from util import Stack, Queue  # These may come in handy
 
 import random
 from ast import literal_eval
@@ -28,6 +29,11 @@ player = Player(world.starting_room)
 # Fill this out with directions to walk
 # traversal_path = ['n', 'n']
 traversal_path = []
+
+### Get all the rooms
+### Path fo go from room[0] to next taget not visted to do that...
+### Need a loop recurshiuon that will re run this for each leg
+### translate to directions
 
 
 
