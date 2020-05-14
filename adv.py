@@ -28,9 +28,37 @@ player = Player(world.starting_room)
 
 # Fill this out with directions to walk
 # traversal_path = ['n', 'n']
+my_key_graph = {
+    "all_rooms": []
+}
 traversal_path = []
 
 ### Get all the rooms
+#can I get the rooms use DFT?
+s = Stack()
+s.push(player.current_room) #difrent paramiter
+all_rooms = set() # Keep track of visited nodes
+
+while s.size() > 0:# Repeat until queue is empty
+    here = s.pop() # Dequeue first vert
+    if here.id not in all_rooms: # If it's not visited:
+        #print(v)
+        all_rooms.add(here.id) # Mark visited
+        my_key_graph[ str(here.id) ] = {
+            "visited": False,
+            "n": None,
+            "s": None,
+            "e": None,
+            "w": None
+        }
+        my_key_graph["all_rooms"].append(here.id)
+        for x in here.get_exits():
+            my_key_graph[ str(here.id) ][x] = here.get_room_in_direction(x).id
+            s.push(here.get_room_in_direction(x))
+#for room in all_rooms:
+#    print(room)
+print(my_key_graph)
+
 ### Path fo go from room[0] to next taget not visted to do that...
 ### Need a loop recurshiuon that will re run this for each leg
 ### translate to directions
