@@ -82,14 +82,27 @@ def dfs(starting_vertex, destination_vertex):
 
 ### Need a loop recurshiuon that will re run this for each leg
 first_start = player.current_room.id
-go_to_room = my_key_graph["all_rooms"][10]
-
-path_leg = dfs(first_start, go_to_room)
-print(path_leg)
-for room in path_leg:
-    my_key_graph[ str(room) ]["visited"] = True
-    my_key_graph["path_to_go"].append(room)
-    print(my_key_graph[ str(room) ])
+my_key_graph[ str(player.current_room.id) ]["visited"] = True
+my_key_graph["path_to_go"].append(player.current_room.id)
+#print(my_key_graph[ str(player.current_room.id) ]["visited"])
+go_to_room = "no Room Yet"#my_key_graph["all_rooms"][1]
+for index in range( 0, len(my_key_graph["all_rooms"]) ):
+#for index in range( 0, 500 ):
+#for x in my_key_graph["all_rooms"]:
+    if my_key_graph[ str(my_key_graph["all_rooms"][index]) ]["visited"] == True:
+        pass
+    else: #triggers on next not visted room
+        #pass
+        #print(my_key_graph[ str(my_key_graph["all_rooms"][index]) ])
+        go_to_room = my_key_graph["all_rooms"][index]
+        path_leg = dfs(first_start, go_to_room)
+        first_start = path_leg[len(path_leg)-1]
+        #print(path_leg)
+        #print(path_leg[len(path_leg)-1])
+        for room in path_leg:
+            my_key_graph[ str(room) ]["visited"] = True
+            if room != my_key_graph["path_to_go"][len(my_key_graph["path_to_go"])-1]:
+                my_key_graph["path_to_go"].append(room)
 print(my_key_graph["path_to_go"])
 
 ### translate to directions
